@@ -4,6 +4,7 @@
 #define REALOC_SIZE 256
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "column.h"
 
 COLUMN* create_column(char* title){
@@ -113,4 +114,44 @@ COLUMN** create_dataframe(int num_columns) {
         }
     }
     return dataframe;
+}
+
+void fill_data_frame(COLUMN **dataframe,int num_columns, int rows){
+    for (int i=0;i<rows;i++){
+        printf("Row %d\n",i);
+        for(int j=0;j<num_columns;j++){
+            printf("Column %d\n",j);
+            printf("Enter the value to add: \n");
+            int value;
+            scanf("%d",&value);
+            insert_value(dataframe[j], value);
+        }
+    }
+}
+
+void hard_fill_data_frame(COLUMN **dataframe,int num_columns, int rows){
+    srand(time(NULL));
+    for (int i=0;i<rows;i++){
+        for(int j=0;j<num_columns;j++){
+            int random_value = rand();
+            printf("%d  ",random_value);
+            insert_value(dataframe[j], random_value);
+        }
+    }
+    printf("The dataFrame has been hard filled\n");
+}
+
+void display_data_frame(COLUMN **dataframe,int num_columns, int num_rows,int num_columns_to_display, int num_rows_to_display){
+    if(num_columns<num_columns_to_display || num_rows<num_rows_to_display){
+        //vérifie que la partie de la dataFrame à afficher est bien dans les limites de la dataFrame
+        printf("Invalid bounds\n");
+    }
+    else{
+        for(int i=0;i<num_rows_to_display;i++){
+            printf("\nRow %d\n",i);
+            for(int j=0;j<num_columns_to_display;j++){
+                printf("%d  ",dataframe[j]->data[i]);
+            }
+        }
+    }
 }

@@ -2,11 +2,14 @@
 #include "column.h"
 
 int main() {
+    int num_col,rows;
     COLUMN *mycol = create_column("My column");
-    insert_value(mycol, 23);
-    insert_value(mycol, 23);
-    insert_value(mycol, 8765);
-    print_col(mycol);
-    printf("%d", number_of_value_equal(mycol,23));
+    printf("how many columns \n");
+    scanf("%d",&num_col);;
+    printf("how many rows \n");
+    scanf("%d",&rows);;
+    COLUMN **dataFrame=create_dataframe(num_col);
+    hard_fill_data_frame(dataFrame,num_col,rows);
+    display_data_frame(dataFrame, num_col,rows,num_col,rows);
     return 0;
 }
