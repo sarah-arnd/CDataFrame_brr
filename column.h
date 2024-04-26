@@ -23,14 +23,6 @@ int number_of_value_less(COLUMN*col, int value);
 int number_of_value_equal(COLUMN*col, int value);
 
 
-//CDataFrame
-COLUMN** create_dataframe(int num_columns);
-
-void fill_data_frame(COLUMN **dataframe,int num_columns, int rows);
-void hard_fill_data_frame(COLUMN **dataframe,int num_columns, int rows);
-
-void display_data_frame(COLUMN **dataframe,int num_columns, int num_rows, int num_columns_to_display, int num_rows_to_display);
-
 
 #ifndef PROJECT_C_DATAFRAME_COLUMN_H
 #define PROJECT_C_DATAFRAME_COLUMN_H
