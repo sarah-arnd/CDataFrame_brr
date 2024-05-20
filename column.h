@@ -14,9 +14,9 @@ typedef struct {
 //Basic functions
 COLUMN* create_column(char* title);
 int insert_value(COLUMN*col, int value);
-void delete_column(COLUMN **col);
+void delete_column(COLUMN *col);
+void delete_row(COLUMN** dataframe, int num_columns, int row,int max_row);
 void print_col(COLUMN *col);
-int number_of_occurences(COLUMN*col,int value);
 int value_at_position(COLUMN*col,int pos);
 int number_of_value_greater(COLUMN*col, int value);
 int number_of_value_less(COLUMN*col, int value);

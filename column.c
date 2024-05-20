@@ -5,12 +5,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "column.h"
 
 COLUMN* create_column(char* title){
     COLUMN* column=(COLUMN*)malloc(sizeof(COLUMN));
     column->data=NULL;
-    column->name=title;
+    column->name=strdup(title);
     column->phys_size=REALOC_SIZE;
     column->log_size=0;
     return column;
@@ -38,26 +39,25 @@ int insert_value(COLUMN* col, int value) {
     return 1;
 }
 
-void delete_column(COLUMN **col){
-    free((*col)->data);
-    free(*col);
-    *col=NULL;
+void delete_column(COLUMN *col){
+    free((col)->data);
+    free(col);
+}
+
+//to be fixed
+void delete_row(COLUMN** dataframe, int num_columns, int row, int max_row) {
+    for (int i = 0; i < num_columns; i++) {
+        for (int j = row; j < max_row; j++) {
+            dataframe[i]->data[j]=dataframe[i]->data[j+1];
+        }
+    }
 }
 
 void print_col(COLUMN *col){
     for(int i=0;i<col->log_size;i++){
-        printf("[%d]  %d\n",i,col->data[i]);
+        printf("%d  ",col->data[i]);
     }
-}
-
-int number_of_occurences(COLUMN *col,int value){
-    int number_of_occ=0;
-    for(int i=0;i<col->log_size;i++){
-        if(col->data[i]==value){
-            number_of_occ++;
-        }
-    }
-    return number_of_occ;
+    printf("\n");
 }
 
 int value_at_position(COLUMN*col,int pos){
